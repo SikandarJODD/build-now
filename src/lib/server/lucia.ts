@@ -4,8 +4,7 @@ import { sveltekit } from "lucia/middleware";
 import { dev } from '$app/environment';
 import { postgres as postgresAdapter } from "@lucia-auth/adapter-postgresql";
 import postgres from "postgres";
-import { DATABASE_URL } from '$env/static/private'
-
+import { DATABASE_URL} from '$env/static/private'
 
 const sql = postgres(DATABASE_URL);
 export const auth = lucia({
