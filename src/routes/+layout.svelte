@@ -5,5 +5,4 @@
 </script>
 
 <NavClean />
-<!-- <Navbar email={data.email} /> -->
 <slot />

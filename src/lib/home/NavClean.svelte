@@ -43,8 +43,8 @@
 
 <nav class="bg-white shadow border-b border-slate-500">
 	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-		<div class="flex h-16 items-center">
-			<div class="flex md:w-[85%] items-center">
+		<div class="flex h-16 items-center w-full">
+			<div class="flex md:w-[80%] items-center">
 				<div class="-ml-2 mr-2 flex items-center md:hidden">
 					<!-- Mobile menu button -->
 					<button
@@ -92,12 +92,13 @@
 						</svg>
 					</button>
 				</div>
-				<div
+				<a
+					href="/"
 					class="flex flex-shrink-0 items-center gap-x-2 bg-green-100 px-3 py-2 rounded-md border border-slate-500 cursor-pointer hover:bg-green-200 transition-all duration-150"
 				>
 					<img class="h-6 md:h-7 w-auto" src={nav.img} alt="Your Company" />
 					<h1 class="font-semibold font-mono md:text-xl">{nav.title}</h1>
-				</div>
+				</a>
 				<!-- Change Justify-Start to Center, End -->
 				<!-- <div class="hidden md:ml-6 md:flex md:space-x-8 w-full justify-center mr-4">
 					{#each nav.listnavs as item}
@@ -124,15 +125,13 @@
 					</div>
 				</div>
 			</div>
-			<div class="flex items-center justify-end w-full">
+			<div class="flex items-center justify-end w-full md:w-fit">
 				<div class="flex-shrink-0">
 					<Button class="hidden md:flex">
 						<Plus size="18" class="mr-1" />
 						Create Portfolio</Button
 					>
-					<Button class=" md:hidden" size="sm">
-						Create
-					</Button>
+					<Button class=" md:hidden" size="sm">Create</Button>
 				</div>
 				<div class="md:ml-4 md:flex md:flex-shrink-0 md:items-center">
 					<!-- Profile dropdown -->
@@ -166,13 +165,25 @@
 						>
 							<!-- Active: "bg-gray-100", Not Active: "" -->
 							{#each profileNavs as item}
-								<a
-									href={item.link}
-									class="hover:bg-gray-100 block px-4 py-2 text-sm text-gray-700"
-									role="menuitem"
-									tabindex="-1"
-									id="user-menu-item-0">{item.name}</a
-								>
+								{#if item.name === 'Sign out'}
+									<form method="POST">
+										<button
+											formaction="/?/logout"
+											class="w-full text-left hover:bg-gray-100 block px-4 py-2 text-sm text-gray-700"
+											role="menuitem"
+											tabindex="-1"
+											id="user-menu-item-0">{item.name}</button
+										>
+									</form>
+								{:else}
+									<a
+										href={item.link}
+										class="hover:bg-gray-100 block px-4 py-2 text-sm text-gray-700"
+										role="menuitem"
+										tabindex="-1"
+										id="user-menu-item-0">{item.name}</a
+									>
+								{/if}
 							{/each}
 						</div>
 					</div>
@@ -193,30 +204,6 @@
 					>{item.name}</a
 				>
 			{/each}
-		</div>
-		<div class="border-t border-gray-200 pb-3 pt-4">
-			<div class="flex items-center px-4 sm:px-6">
-				<div class="flex-shrink-0">
-					<img
-						class="h-10 w-10 rounded-full"
-						src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-						alt=""
-					/>
-				</div>
-				<div class="ml-3">
-					<div class="text-base font-medium text-gray-800">David</div>
-					<div class="text-sm font-medium text-gray-500">david@gmailc.com</div>
-				</div>
-			</div>
-			<div class="mt-3 space-y-1">
-				{#each profileNavs as item}
-					<a
-						href={item.link}
-						class="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800 sm:px-6"
-						>{item.name}</a
-					>
-				{/each}
-			</div>
 		</div>
 	</div>
 </nav>
