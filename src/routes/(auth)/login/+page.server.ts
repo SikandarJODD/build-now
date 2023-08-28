@@ -10,7 +10,7 @@ export const actions: Actions = {
         const formData = await request.formData();
         const email = formData.get("email");
         const password = formData.get("password");
-        
+
         // basic check
         if (
             typeof email !== "string" ||
@@ -40,7 +40,8 @@ export const actions: Actions = {
             );
             const session = await auth.createSession({
                 userId: user.userId,
-                attributes: {}
+                attributes: {
+                }
             });
             locals.auth.setSession(session); // set session cookie
         } catch (e) {

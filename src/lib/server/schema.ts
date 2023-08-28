@@ -1,5 +1,5 @@
 // schema.js
-import { pgTable, bigint, varchar, boolean } from "drizzle-orm/pg-core";
+import { pgTable, bigint, varchar, boolean, text, date, numeric, serial } from "drizzle-orm/pg-core";
 
 export const user = pgTable("auth_user", {
     id: varchar("id", {
@@ -40,4 +40,48 @@ export const key = pgTable("user_key", {
     hashedPassword: varchar("hashed_password", {
         length: 255
     })
+});
+
+export const meta = pgTable("meta", {
+    id: serial("id").primaryKey(),
+    userId: varchar("user_id", {
+        length: 200
+    }),
+    created_at: date("created_at").defaultNow(),
+    name: varchar("name", { length: 200 }),
+    metaimage: varchar("metaimage", { length: 200 }),
+    metatitle: varchar("metatitle", { length: 200 }),
+    metadesc: varchar("metadesc", { length: 200 }),
+    userUrl: varchar("user_url", { length: 200 }),
+})
+
+export const exp = pgTable("exp", {
+	// You can use { mode: "bigint" } if numbers are exceeding js number limitations
+	id: bigint("id", { mode: "number" }).primaryKey().notNull(),
+	position: text("position"),
+	desc: text("desc"),
+	name: text("name"),
+	expe: text("expe"),
+	userUrl: text("user_url"),
+});
+
+export const coding = pgTable("coding", {
+	// You can use { mode: "bigint" } if numbers are exceeding js number limitations
+	id: bigint("id", { mode: "number" }).primaryKey().notNull(),
+	lang: text("lang"),
+	framework: text("framework"),
+	database: text("database"),
+	others: text("others"),
+	userId: text("user_id"),
+});
+
+export const projects = pgTable("projects", {
+	// You can use { mode: "bigint" } if numbers are exceeding js number limitations
+	id: bigint("id", { mode: "number" }).primaryKey().notNull(),
+	name: text("name"),
+	tech: text("tech"),
+	desc: text("desc"),
+	githubLink: text("github_link"),
+	hostedLink: text("hosted_link"),
+	userUrl: text("user_url"),
 });

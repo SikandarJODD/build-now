@@ -4,6 +4,17 @@ CREATE TABLE IF NOT EXISTS "user_key" (
 	"hashed_password" varchar(255)
 );
 --> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "meta" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"user_id" varchar(200),
+	"created_at" date DEFAULT now(),
+	"name" varchar(200),
+	"metaimage" varchar(200),
+	"metatitle" varchar(200),
+	"metadesc" varchar(200),
+	"user_url" varchar(200)
+);
+--> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "user_session" (
 	"id" varchar(128) PRIMARY KEY NOT NULL,
 	"user_id" varchar(15) NOT NULL,

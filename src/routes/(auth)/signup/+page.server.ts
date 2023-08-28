@@ -45,11 +45,7 @@ export const actions: Actions = {
                     email: String(email)
                 }
             });
-            // const session = await auth.createSession({
-            //     userId: user.userId,
-            //     attributes: {}
-            // });
-            // locals.auth.setSession(session); // set session cookie
+         
         } catch (e) {
             console.log(e);
             return fail(500, {
