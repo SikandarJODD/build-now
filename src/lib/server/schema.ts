@@ -56,32 +56,45 @@ export const meta = pgTable("meta", {
 })
 
 export const exp = pgTable("exp", {
-	// You can use { mode: "bigint" } if numbers are exceeding js number limitations
-	id: bigint("id", { mode: "number" }).primaryKey().notNull(),
-	position: text("position"),
-	desc: text("desc"),
-	name: text("name"),
-	expe: text("expe"),
-	userUrl: text("user_url"),
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    id: bigint("id", { mode: "number" }).primaryKey().notNull(),
+    position: text("position"),
+    desc: text("desc"),
+    name: text("name"),
+    expe: text("expe"),
+    userUrl: text("user_url"),
 });
 
 export const coding = pgTable("coding", {
-	// You can use { mode: "bigint" } if numbers are exceeding js number limitations
-	id: bigint("id", { mode: "number" }).primaryKey().notNull(),
-	lang: text("lang"),
-	framework: text("framework"),
-	database: text("database"),
-	others: text("others"),
-	userId: text("user_id"),
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    id: bigint("id", { mode: "number" }).primaryKey().notNull(),
+    lang: text("lang"),
+    framework: text("framework"),
+    database: text("database"),
+    others: text("others"),
+    userId: text("user_id"),
 });
 
 export const projects = pgTable("projects", {
-	// You can use { mode: "bigint" } if numbers are exceeding js number limitations
-	id: bigint("id", { mode: "number" }).primaryKey().notNull(),
-	name: text("name"),
-	tech: text("tech"),
-	desc: text("desc"),
-	githubLink: text("github_link"),
-	hostedLink: text("hosted_link"),
-	userUrl: text("user_url"),
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    id: bigint("id", { mode: "number" }).primaryKey().notNull(),
+    name: text("name"),
+    tech: text("tech"),
+    desc: text("desc"),
+    githubLink: text("github_link"),
+    hostedLink: text("hosted_link"),
+    userUrl: text("user_url"),
+});
+export const about = pgTable("about", {
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    id: bigint("id", { mode: "number" }).primaryKey().notNull(),
+    name: text("name"),
+    email: text("email"),
+    pos: text("pos"),
+    desc: text("pos"),
+    exps: text("exps"),
+    resumeLink: text("resume_link"),
+    githubLink: text("github_link"),
+    linkedLink: text("linked_link"),
+    userUrl: text("user_url"),
 });

@@ -4,13 +4,20 @@
 	import Input from '$lib/components/ui/input/input.svelte';
 	import Label from '$lib/components/ui/label/label.svelte';
 	import { Textarea } from '$lib/components/ui/textarea';
+
 	import type { PageData } from './$types';
+	import { superForm } from 'sveltekit-superforms/client';
+
+	export let data: PageData;
+
+	// Client API:
+	const { form } = superForm(data.form);
 
 	let name = '';
-	let title = '';
-	let src = '';
-	let desc = '';
-	let meta_url = '';
+	let title = $form.metatitle;
+	let src = $form.metaimage;
+	let desc = $form.metadesc;
+	let meta_url = $form.userUrl;
 	$: {
 		title.length > 40 && (title = title.slice(0, 40));
 		desc.length > 200 && (desc = desc.slice(0, 200));
@@ -34,11 +41,23 @@
 						<div class="grid gap-4 grid-cols-1 md:grid-cols-2">
 							<div class="grid gap-2">
 								<Label for="web_title">URL</Label>
-								<Input id="web_title" type="text" placeholder="/aditya" name="web_url" bind:value={meta_url} />
+								<Input
+									id="web_title"
+									type="text"
+									placeholder="/aditya"
+									name="web_url"
+									bind:value={$form.userUrl}
+								/>
 							</div>
 							<div class="grid gap-2">
 								<Label for="name">Name</Label>
-								<Input id="name" type="text" placeholder="Aditya" name="name"  bind:value={name} />
+								<Input
+									id="name"
+									type="text"
+									placeholder="Aditya"
+									name="name"
+									bind:value={$form.name}
+								/>
 							</div>
 						</div>
 						<div class="grid gap-2">
@@ -54,14 +73,18 @@
 								placeholder="Aditya Portfolio"
 								name="web_title"
 								class="capitalize"
-								bind:value={title}
+								bind:value={$form.metatitle}
 							/>
 						</div>
 						<div class="grid gap-2">
 							<Label for="web_image">Image</Label>
-							<Input id="web_image" type="text" placeholder="Image url" name="web_image" 
-								bind:value={src}
-							 />
+							<Input
+								id="web_image"
+								type="text"
+								placeholder="Image url"
+								name="web_image"
+								bind:value={$form.metaimage}
+							/>
 						</div>
 						<div class="grid gap-2">
 							<Label for="web_title" class=" flex justify-between">
@@ -73,7 +96,7 @@
 							<Textarea
 								placeholder="Creating exceptional web experiences through innovative design..."
 								name="desc"
-								bind:value={desc}
+								bind:value={$form.metadesc}
 							/>
 						</div>
 					</Card.Content>
@@ -84,14 +107,14 @@
 			</Card.Root>
 		</div>
 		<div
-			class=" m-3 h-fit p-3 md:px-12 md:m-0 border-2 py-3 md:py-10 border-slate-500 rounded-xl flex flex-col items-center shadow-md shadow-gray-200"
+			class=" m-3 h-fit p-3 md:px-12 md:m-0 border-2 py-3 md:py-6 border-slate-500 rounded-xl flex flex-col items-center shadow-md shadow-gray-200"
 		>
 			{#if src.length > 0}
 				<div class=" ">
 					<img
 						{src}
 						alt="portfolio"
-						class="md:w-72 h-full object-contain rounded-3xl border border-slate-400"
+						class="md:w-64 h-full object-contain rounded-3xl border border-slate-400"
 					/>
 				</div>
 			{:else}

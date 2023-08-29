@@ -1,16 +1,63 @@
 // routes/+page.server.ts
-import { redirect, fail, error } from "@sveltejs/kit";
-import { auth } from "$lib/server/lucia";
+import { redirect } from "@sveltejs/kit";
 import type { PageServerLoad, Actions } from "./$types";
 import { db } from "$lib/server";
-import { meta, projects } from "$lib/server/schema";
+import { meta } from "$lib/server/schema";
+import { eq } from 'drizzle-orm'
+
+import { z } from 'zod'
+import { superValidate } from 'sveltekit-superforms/server';
+
+/*
+let name = '';
+    let title = '';
+    let src = '';
+    let desc = '';
+    let meta_url = '';
+*/
+const schema = z.object({
+    name: z.string(),
+    metadesc: z.string(),
+    metatitle: z.string(),
+    metaimage: z.string(),
+    userUrl: z.string(),
+});
+let obj = {
+    name: '',
+    metadesc: '',
+    metatitle: '',
+    metaimage: '',
+    userUrl: '',
+
+}
 
 export const load: PageServerLoad = async ({ locals }) => {
     const session = await locals.auth.validate();
+
     if (!session) throw redirect(302, "/login");
+    let ans = await db.select().from(meta).where(eq(meta.userId, session.user.userId));
+    if (ans.length > 0) {
+        obj.name = String(ans[0].name);
+        obj.metatitle = String(ans[0].metatitle);
+        obj.metadesc = String(ans[0].metadesc);
+        obj.metaimage = String(ans[0].metaimage);
+        obj.userUrl = String(ans[0].userUrl);
+        const form = await superValidate(obj, schema);
+        return {
+            form,
+            userId: session.user.userId,
+            email: session.user.email,
+        };
+    }
+    const form = await superValidate(schema);
+
+    // Always return { form } in load and form actions.
+
     return {
+        form,
         userId: session.user.userId,
-        email: session.user.email
+        email: session.user.email,
+
     };
 };
 export const actions: Actions = {
