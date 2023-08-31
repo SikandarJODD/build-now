@@ -1,0 +1,1 @@
+ALTER TABLE "exp" ADD COLUMN "certificate" text;

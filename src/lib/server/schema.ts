@@ -63,6 +63,7 @@ export const exp = pgTable("exp", {
     name: text("name"),
     expe: text("expe"),
     userUrl: text("user_url"),
+    cert: text("certificate")
 });
 
 export const coding = pgTable("coding", {
@@ -87,14 +88,19 @@ export const projects = pgTable("projects", {
 });
 export const about = pgTable("about", {
     // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    id: bigint("id", { mode: "number" }).primaryKey().notNull(),
+    id: serial("id").primaryKey(),
     name: text("name"),
     email: text("email"),
     pos: text("pos"),
-    desc: text("pos"),
-    exps: text("exps"),
     resumeLink: text("resume_link"),
     githubLink: text("github_link"),
     linkedLink: text("linked_link"),
     userUrl: text("user_url"),
+});
+
+export const random = pgTable("random", {
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    id: bigint("id", { mode: "number" }).primaryKey().notNull(),
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    digit: bigint("digit", { mode: "number" }),
 });

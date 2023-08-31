@@ -1,8 +1,8 @@
 {
   "version": "5",
   "dialect": "pg",
-  "id": "92fc9460-b963-41a0-ae24-e7211910545b",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "6f6125e9-10db-4cc0-bbc5-2ba435cc7834",
+  "prevId": "92fc9460-b963-41a0-ae24-e7211910545b",
   "tables": {
     "about": {
       "name": "about",
@@ -144,6 +144,12 @@
         },
         "user_url": {
           "name": "user_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "certificate": {
+          "name": "certificate",
           "type": "text",
           "primaryKey": false,
           "notNull": false

@@ -1,3 +1,32 @@
+CREATE TABLE IF NOT EXISTS "about" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"name" text,
+	"email" text,
+	"pos" text,
+	"resume_link" text,
+	"github_link" text,
+	"linked_link" text,
+	"user_url" text
+);
+--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "coding" (
+	"id" bigint PRIMARY KEY NOT NULL,
+	"lang" text,
+	"framework" text,
+	"database" text,
+	"others" text,
+	"user_id" text
+);
+--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "exp" (
+	"id" bigint PRIMARY KEY NOT NULL,
+	"position" text,
+	"desc" text,
+	"name" text,
+	"expe" text,
+	"user_url" text
+);
+--> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "user_key" (
 	"id" varchar(255) PRIMARY KEY NOT NULL,
 	"user_id" varchar(15) NOT NULL,
@@ -13,6 +42,21 @@ CREATE TABLE IF NOT EXISTS "meta" (
 	"metatitle" varchar(200),
 	"metadesc" varchar(200),
 	"user_url" varchar(200)
+);
+--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "projects" (
+	"id" bigint PRIMARY KEY NOT NULL,
+	"name" text,
+	"tech" text,
+	"desc" text,
+	"github_link" text,
+	"hosted_link" text,
+	"user_url" text
+);
+--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "random" (
+	"id" bigint PRIMARY KEY NOT NULL,
+	"digit" bigint
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "user_session" (
