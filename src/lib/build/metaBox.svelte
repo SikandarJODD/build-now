@@ -6,7 +6,7 @@
 	let cls = 'flex items-center gap-3 w-fit my-3';
 </script>
 
-<Box>
+<!-- <Box>
 	<div class={cls}>
 		<Label>Username</Label>
 		<Input bind:value={username} />
@@ -15,4 +15,4 @@
 		<Label>Name</Label>
 		<Input bind:value={username} />
 	</div>
-</Box>
+</Box> -->

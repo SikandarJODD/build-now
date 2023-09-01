@@ -28,9 +28,9 @@
 				<Card.Content class="grid gap-4">
 					<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 						<div class="grid gap-2">
-							<Label for="name">Company Name</Label>
+							<Label for="company_name">Company Name</Label>
 							<Input
-								id="name"
+								id="company_name"
 								type="text"
 								placeholder="Company Name"
 								name="name"
@@ -38,9 +38,9 @@
 							/>
 						</div>
 						<div class="grid gap-2">
-							<Label for="position">Position</Label>
+							<Label for="position_stuf">Position</Label>
 							<Input
-								id="position"
+								id="position_stuf"
 								type="text"
 								placeholder="Juniour Developer"
 								name="position"
@@ -49,9 +49,9 @@
 						</div>
 					</div>
 					<div class="grid gap-2">
-						<Label for="duration">Duration</Label>
+						<Label for="duration_stuf">Duration</Label>
 						<Input
-							id="duration"
+							id="duration_stuf"
 							type="text"
 							placeholder="3 Months, 1 Year, 2 Years"
 							bind:value={$form.duration}
@@ -69,8 +69,8 @@
 						/>
 					</div>
 					<div class="grid gap-2">
-						<Label for="desc">Description</Label>
-						<Textarea id="desc" name="desc" bind:value={$form.desc} />
+						<Label for="desc_kit">Description</Label>
+						<Textarea id="desc_kit" name="desc" bind:value={$form.desc} />
 					</div>
 				</Card.Content>
 				<Card.Footer>

@@ -15,6 +15,27 @@
       "when": 1693485900720,
       "tag": "0001_dapper_hitman",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1693596509743,
+      "tag": "0002_supreme_calypso",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1693598005914,
+      "tag": "0003_true_tony_stark",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1693598180134,
+      "tag": "0004_useful_sprite",
+      "breakpoints": true
     }
   ]
 }

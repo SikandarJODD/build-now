@@ -66,7 +66,7 @@
 					</div>
 				</Card.Content>
 				<Card.Footer>
-					<Button class="w-full">Submit</Button>
+					<Button class="w-full" type="submit">Submit</Button>
 				</Card.Footer>
 			</form>
 		</Card.Root>

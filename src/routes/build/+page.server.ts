@@ -2,7 +2,7 @@
 import { fail, redirect } from "@sveltejs/kit";
 import type { PageServerLoad, Actions } from "./$types";
 import { db } from "$lib/server";
-import { about, coding, exp, meta, projects } from "$lib/server/schema";
+import { about, coding, exp, meta, projects, user } from "$lib/server/schema";
 import { eq } from 'drizzle-orm'
 
 import { z } from 'zod'
@@ -10,7 +10,6 @@ import { superValidate } from 'sveltekit-superforms/server';
 
 const schema = z.object({
     name: z.string(),
-    metadesc: z.string(),
     metatitle: z.string(),
     metaimage: z.string(),
     userUrl: z.string(),
@@ -22,6 +21,8 @@ const aboutSchema = z.object({
     resumeLink: z.string(),
     githubLink: z.string(),
     linkedLink: z.string(),
+    twitterLink: z.string(),
+    desc: z.string(),
     pos: z.string()
 });
 
@@ -60,11 +61,13 @@ export const load: PageServerLoad = async ({ locals }) => {
     const session = await locals.auth.validate();
 
     if (!session) throw redirect(302, "/login");
-    let ans = await db.select().from(meta).where(eq(meta.userId, session.user.userId));
+    console.log("Session ID", session.user.userId);
+    let auth_user = await db.select().from(user).where(eq(user.email, session.user.email));
+
+    let ans = await db.select().from(meta).where(eq(meta.userId, auth_user[0].id));
     if (ans.length > 0) {
         obj.name = String(ans[0].name);
         obj.metatitle = String(ans[0].metatitle);
-        obj.metadesc = String(ans[0].metadesc);
         obj.metaimage = String(ans[0].metaimage);
         obj.userUrl = String(ans[0].userUrl);
         const form = await superValidate(obj, schema);
@@ -75,7 +78,7 @@ export const load: PageServerLoad = async ({ locals }) => {
         return {
 
             form, aboutform, codingform,
-            expsform,
+            expsform,projectform,
             userId: session.user.userId,
             email: session.user.email,
         };
@@ -100,7 +103,6 @@ export const actions: Actions = {
         let form = Object.fromEntries(await request.formData());
         let username = form.name;
         let metaimage = form.web_image;
-        let metadesc = form.desc;
         let metatitle = form.web_title;
         let user_url = form.web_url;
         let user_id = session.user.userId;
@@ -111,7 +113,6 @@ export const actions: Actions = {
 
             await db.insert(meta).values({
                 name: username,
-                metadesc: metadesc,
                 metatitle: metatitle,
                 metaimage: metaimage,
                 userId: user_id,
@@ -139,6 +140,8 @@ export const actions: Actions = {
         let linked = form.data.linkedLink;
         let github = form.data.githubLink;
         let resume = form.data.resumeLink;
+        let twitter = form.data.twitterLink;
+        let desc = form.data.desc;
         let pos = form.data.pos;
         let user = await db.select().from(meta).where(eq(meta.userId, session.user.userId));
 
@@ -154,6 +157,8 @@ export const actions: Actions = {
                     resumeLink: resume,
                     githubLink: github,
                     linkedLink: linked,
+                    twitterLink: twitter,
+                    desc: desc,
                     userUrl: user_url,
                     pos: pos,
                 })
@@ -187,8 +192,6 @@ export const actions: Actions = {
         if (user.length !== 0) {
 
             let user_url = user[0].userUrl;
-
-
             // Convenient validation check:
             try {
                 await db.insert(coding).values({

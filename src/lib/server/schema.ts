@@ -51,13 +51,12 @@ export const meta = pgTable("meta", {
     name: varchar("name", { length: 200 }),
     metaimage: varchar("metaimage", { length: 200 }),
     metatitle: varchar("metatitle", { length: 200 }),
-    metadesc: varchar("metadesc", { length: 200 }),
     userUrl: varchar("user_url", { length: 200 }),
 })
 
 export const exp = pgTable("exp", {
     // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    id: bigint("id", { mode: "number" }).primaryKey().notNull(),
+    id: serial("id").primaryKey(),
     position: text("position"),
     desc: text("desc"),
     name: text("name"),
@@ -68,7 +67,7 @@ export const exp = pgTable("exp", {
 
 export const coding = pgTable("coding", {
     // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    id: bigint("id", { mode: "number" }).primaryKey().notNull(),
+    id: serial("id").primaryKey(),
     lang: text("lang"),
     framework: text("framework"),
     database: text("database"),
@@ -78,7 +77,7 @@ export const coding = pgTable("coding", {
 
 export const projects = pgTable("projects", {
     // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    id: bigint("id", { mode: "number" }).primaryKey().notNull(),
+    id: serial("id").primaryKey(),
     name: text("name"),
     tech: text("tech"),
     desc: text("desc"),
@@ -95,6 +94,8 @@ export const about = pgTable("about", {
     resumeLink: text("resume_link"),
     githubLink: text("github_link"),
     linkedLink: text("linked_link"),
+    twitterLink: text("twitter_link"),
+    desc: text("desc"),
     userUrl: text("user_url"),
 });
 

@@ -13,7 +13,7 @@
 	export let data;
 
 	// Client API:
-	const { form } = superForm(data.expsform);
+	const { form } = superForm(data.projectform);
 </script>
 
 <div class="w-full md:w-[80%] my-3 md:my-10 grid grid-cols-1 md:grid-cols-2 md:container">
@@ -28,9 +28,9 @@
 				<Card.Content class="grid gap-4">
 					<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 						<div class="grid gap-2">
-							<Label for="project">Project Name</Label>
+							<Label for="project_name">Project Name</Label>
 							<Input
-								id="project"
+								id="project_name"
 								type="text"
 								placeholder="Project Name"
 								name="name"
@@ -38,9 +38,9 @@
 							/>
 						</div>
 						<div class="grid gap-2">
-							<Label for="tech">Tech Stack</Label>
+							<Label for="tech_name">Tech Stack</Label>
 							<Input
-								id="tech"
+								id="tech_name"
 								type="text"
 								placeholder="Svelte,Supabase"
 								name="tech"
@@ -49,9 +49,9 @@
 						</div>
 					</div>
 					<div class="grid gap-2">
-						<Label for="github">Github Repo</Label>
+						<Label for="git_stuf">Github Repo</Label>
 						<Input
-							id="github"
+							id="git_stuf"
 							type="text"
 							placeholder="github.com/username/repo"
 							bind:value={$form.github}
@@ -59,9 +59,9 @@
 						/>
 					</div>
 					<div class="grid gap-2">
-						<Label for="hosted">Hosted Link</Label>
+						<Label for="host_stuf">Hosted Link</Label>
 						<Input
-							id="hosted"
+							id="host_stuf"
 							type="text"
 							placeholder="build-now.vercel.app"
 							bind:value={$form.hosted}
@@ -69,8 +69,8 @@
 						/>
 					</div>
 					<div class="grid gap-2">
-						<Label for="desc">Description</Label>
-						<Textarea id="desc" name="desc" bind:value={$form.desc} rows="7" placeholder="Poject Description..." />
+						<Label for="desc_stuf">Description</Label>
+						<Textarea id="desc_stuf" name="desc" bind:value={$form.desc} rows="7" placeholder="Poject Description..." />
 					</div>
 				</Card.Content>
 				<Card.Footer>

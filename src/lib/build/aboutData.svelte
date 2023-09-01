@@ -7,11 +7,16 @@
 	import { Badge } from '$lib/components/ui/badge';
 
 	import { superForm } from 'sveltekit-superforms/client';
+	import Textarea from '$lib/components/ui/textarea/textarea.svelte';
 
 	export let data;
 
 	// Client API:
 	const { form } = superForm(data.aboutform);
+	$: desc = '';
+	$: {
+		desc.length > 400 && (desc = desc.slice(0, 400));
+	}
 </script>
 
 <div class="w-full md:w-fit my-3 md:my-10">
@@ -27,9 +32,9 @@
 				<Card.Content class="grid gap-4">
 					<div class="grid gap-4 grid-cols-1 md:grid-cols-2">
 						<div class="grid gap-2">
-							<Label for="name">Name</Label>
+							<Label for="name_first">Name</Label>
 							<Input
-								id="name"
+								id="name_first"
 								type="text"
 								placeholder="Aditya"
 								name="name"
@@ -37,9 +42,9 @@
 							/>
 						</div>
 						<div class="grid gap-2">
-							<Label for="email">Email</Label>
+							<Label for="email_first">Email</Label>
 							<Input
-								id="email"
+								id="email_first"
 								type="email"
 								placeholder="code@gmail.com"
 								bind:value={$form.email}
@@ -47,10 +52,54 @@
 							/>
 						</div>
 					</div>
+					<div class="grid gap-4 grid-cols-1 md:grid-cols-2">
+						<div class="grid gap-2">
+							<Label for="resumeLink">Resume Link</Label>
+							<Input
+								id="resumeLink"
+								type="text"
+								placeholder="Resume"
+								name="resumeLink"
+								bind:value={$form.resumeLink}
+							/>
+						</div>
+						<div class="grid gap-2">
+							<Label for="githubLink">Github Link</Label>
+							<Input
+								id="githubLink"
+								type="text"
+								placeholder="github.com/your_username"
+								name="githubLink"
+								bind:value={$form.githubLink}
+							/>
+						</div>
+					</div>
+					<div class="grid gap-4 grid-cols-1 md:grid-cols-2" >
+						<div class="grid gap-2">
+							<Label for="linkedLink">Linkedin Link</Label>
+							<Input
+								id="linkedLink"
+								type="text"
+								placeholder="linked.in/in/your_username"
+								name="linkedLink"
+								bind:value={$form.linkedLink}
+							/>
+						</div>
+						<div class="grid gap-2">
+							<Label for="twitterLink">Twitter Link</Label>
+							<Input
+								id="twitterLink"
+								type="text"
+								placeholder="linked.in/in/your_username"
+								name="twitterLink"
+								bind:value={$form.linkedLink}
+							/>
+						</div>
+					</div>
 					<div class="grid gap-2">
-						<Label for="pos">Positon</Label>
+						<Label for="pos_first">Positon</Label>
 						<Input
-							id="pos"
+							id="pos_first"
 							type="text"
 							placeholder="Full Stack Developer"
 							name="pos"
@@ -58,33 +107,17 @@
 						/>
 					</div>
 					<div class="grid gap-2">
-						<Label for="resumeLink">Resume Link</Label>
-						<Input
-							id="resumeLink"
-							type="text"
-							placeholder="Resume"
-							name="resumeLink"
-							bind:value={$form.resumeLink}
-						/>
-					</div>
-					<div class="grid gap-2">
-						<Label for="githubLink">Github Link</Label>
-						<Input
-							id="githubLink"
-							type="text"
-							placeholder="github.com/your_username"
-							name="githubLink"
-							bind:value={$form.githubLink}
-						/>
-					</div>
-					<div class="grid gap-2">
-						<Label for="linkedLink">Linked in Link</Label>
-						<Input
-							id="linkedLink"
-							type="text"
-							placeholder="linked.in/in/your_username"
-							name="linkedLink"
-							bind:value={$form.linkedLink}
+						<Label for="we_desc" class=" flex justify-between">
+							Description
+							<span class={desc.length > 400 ? 'text-red-600' : 'text-primary'}
+								>{desc.length}/400</span
+							>
+						</Label>
+						<Textarea
+							placeholder="Creating exceptional web experiences through innovative design..."
+							id="we_desc"
+							name="desc"
+							bind:value={$form.desc}
 						/>
 					</div>
 				</Card.Content>
