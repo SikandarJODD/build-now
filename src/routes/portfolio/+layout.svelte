@@ -1,8 +1,9 @@
 <script>
-	import SideBar from "$lib/portfolio/SideBar.svelte";
-
-
+	import SideBar from '$lib/portfolio/SideBar.svelte';
+	export let data;
+	$: console.log('User data', data.getUser);
 </script>
-<SideBar>
-    <slot></slot>
+
+<SideBar img={data.getUser} >
+	<slot />
 </SideBar>

@@ -74,7 +74,7 @@
 							/>
 						</div>
 					</div>
-					<div class="grid gap-4 grid-cols-1 md:grid-cols-2" >
+					<div class="grid gap-4 grid-cols-1 md:grid-cols-2">
 						<div class="grid gap-2">
 							<Label for="linkedLink">Linkedin Link</Label>
 							<Input
@@ -92,7 +92,7 @@
 								type="text"
 								placeholder="linked.in/in/your_username"
 								name="twitterLink"
-								bind:value={$form.linkedLink}
+								bind:value={$form.twitterLink}
 							/>
 						</div>
 					</div>

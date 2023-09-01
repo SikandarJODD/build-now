@@ -1,5 +1,7 @@
 <script>
+	import { onMount } from 'svelte';
 
+	export let data='';
 	// Data from Server - Table About
 	let about = {
 		positon: 'Full-Stack Developer',
@@ -28,6 +30,17 @@
 			}
 		]
 	};
+	$:{
+		if (Object.keys(data).length !== 0) {
+			about.positon = data?.pos;
+			about.name = data?.name ;
+			about.email = data?.email;
+			about.socials[0].link = data?.linkedLink;
+			about.socials[1].link = data?.githubLink;
+			about.socials[2].link = data?.twitterLink;
+			about.socials[3].link = data?.email;
+		}
+	}
 </script>
 
 <div class="md:py-7 md:px-5">

@@ -11,9 +11,10 @@
 
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import { onMount } from 'svelte';
 	let routeId = $page.route.id;
 	$: main_id = routeId;
-
+	export let img = '';
 	$: isMenuOpen = false;
 	let profileData = {
 		name: 'Priya Pal',
@@ -48,6 +49,14 @@
 		]
 	};
 	let isActive = '';
+	// onMount(() => {
+	// 	profileData.image = img;
+	// });
+	$: {
+		if (img.length > 0) {
+			profileData.image = img;
+		}
+	}
 </script>
 
 <div>
@@ -179,13 +188,11 @@
 	<!-- Static sidebar for desktop -->
 	<div class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-80 lg:flex-col">
 		<!-- Sidebar component, swap this element with another sidebar if you like -->
-		<div
-			class="flex grow flex-col gap-y-10 overflow-y-auto bg-gray-900 px-6 m-3 rounded-2xl "
-		>
+		<div class="flex grow flex-col gap-y-10 overflow-y-auto bg-gray-900 px-6 m-3 rounded-2xl">
 			<div class="flex h-64 mt-6 justify-center items-center rounded-xl overflow-hidden">
 				<img
 					class="w-64 rounded-2xl border border-slate-500 p-2 bg-gray-800"
-					src="https://i.pinimg.com/736x/e2/2b/ed/e22bed3bdba0f328efdb3521e07bf823.jpg"
+					src={profileData.image}
 					alt="Your Company"
 				/>
 			</div>
@@ -279,5 +286,3 @@
 		</div>
 	</main>
 </div>
-
-

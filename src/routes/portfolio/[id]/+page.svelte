@@ -1,9 +1,11 @@
 <script>
 	import ProfileCard from '$lib/portfolio/ProfileCard.svelte';
+	export let data;
+	// $: console.log(data.getUser);
 </script>
 
 <div class="co rounded-xl">
-	<ProfileCard />
+	<ProfileCard data={data.getUser} />
 </div>
 
 <style>
