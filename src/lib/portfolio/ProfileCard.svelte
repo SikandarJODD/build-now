@@ -1,7 +1,5 @@
 <script>
-	import { onMount } from 'svelte';
-
-	export let data='';
+	export let data = '';
 	// Data from Server - Table About
 	let about = {
 		positon: 'Full-Stack Developer',
@@ -30,10 +28,10 @@
 			}
 		]
 	};
-	$:{
+	$: {
 		if (Object.keys(data).length !== 0) {
 			about.positon = data?.pos;
-			about.name = data?.name ;
+			about.name = data?.name;
 			about.email = data?.email;
 			about.socials[0].link = data?.linkedLink;
 			about.socials[1].link = data?.githubLink;
@@ -43,7 +41,7 @@
 	}
 </script>
 
-<div class="md:py-7 md:px-5">
+<div class="md:py-7  md:px-5">
 	<div
 		class="shadow-md bg-gray-50 bgcolor md:shadow-md shadow-slate-500 md:h-40 rounded-xl p-5 flex flex-wrap items-center justify-center md:justify-between md:px-20"
 	>

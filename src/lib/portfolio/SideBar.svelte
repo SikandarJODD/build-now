@@ -279,7 +279,12 @@
 		</a>
 	</div>
 
-	<main class="py-10 md:mt-3 md:py-0 lg:pl-72">
+	<!-- <main class="py-10  md:py-0 lg:pl-72">
+		<div class="px-4 sm:px-6 lg:px-8">
+			<slot />
+		</div>
+	</main> -->
+	<main class="py-3 lg:pl-72">
 		<div class="px-4 sm:px-6 lg:px-8">
 			<!-- Your content -->
 			<slot />

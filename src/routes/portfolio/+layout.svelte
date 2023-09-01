@@ -4,6 +4,18 @@
 	$: console.log('User data', data.getUser);
 </script>
 
-<SideBar img={data.getUser} >
-	<slot />
-</SideBar>
+<main class="h-screen co">
+	<SideBar img={data.getUser}>
+		<slot />
+	</SideBar>
+</main>
+
+<style>
+	.co {
+		background-color: white;
+	}
+	main{
+		cursor: url('$lib/cursor.png'), auto;
+	}
+	
+</style>
