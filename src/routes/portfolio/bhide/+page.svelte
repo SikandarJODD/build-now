@@ -1,15 +1,15 @@
 <script>
 	import AboutUser from '$lib/portfolio/AboutUser.svelte';
 	import ProfileCard from '$lib/portfolio/ProfileCard.svelte';
+	import SkillsUser from '$lib/portfolio/SkillsUser.svelte';
 </script>
 
 <section>
 	<div class="co rounded-xl shadow-md shadow-gray-400">
 		<ProfileCard />
 	</div>
-	<div>
-		<AboutUser />
-	</div>
+	<AboutUser />
+	<SkillsUser />
 </section>
 
 <style>

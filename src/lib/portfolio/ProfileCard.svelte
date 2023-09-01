@@ -88,7 +88,7 @@
 		border: 2px solid #1a202c;
 		box-shadow: 4px 4px #1d2537;
 	}
-	.font-baloo {
+	:global(.font-baloo ){
 		font-family: 'Baloo Bhaina 2', cursive;
 	}
 	.bgcolor {

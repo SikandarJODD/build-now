@@ -3,7 +3,7 @@
 	import { FileCheck2 } from 'lucide-svelte';
 </script>
 
-<div class="border border-slate-300 px-4 py-7 mt-6 from-white to-gray-200/40 bg-gradient-to-r">
+<div class="border border-slate-300 md:border-slate-700 px-6 py-7 mt-7 from-white to-gray-200/30 bg-gradient-to-r">
 	<div class="md:border-l-2 md:px-6 md:border-blue-600">
 		<h1 class="text-2xl md:text-3xl font-bold text-center md:text-left">Introduction</h1>
 		<p class="max-w-4xl py-4 text-gray-600">
