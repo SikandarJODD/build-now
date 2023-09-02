@@ -4,8 +4,8 @@
 	import * as Card from '$lib/components/ui/card';
 	import { Input } from '$lib/components/ui/input';
 	import { Label } from '$lib/components/ui/label';
-	import * as AlertDialog from '$lib/components/ui/alert-dialog';
 	import { goto } from '$app/navigation';
+	import { redirect } from '@sveltejs/kit';
 </script>
 
 <div class="justify-center flex h-[90.5vh] items-center bg-slate-200">
@@ -26,9 +26,15 @@
 				</div>
 			</Card.Content>
 			<Card.Footer>
-				<Button class="w-full" on:click={()=>{
-					goto('/build')
-				}} type="submit">Log In</Button>
+				<Button
+					class="w-full"
+					on:click={() => {
+						setTimeout(() => {
+							goto('/build');
+						}, 1);
+					}}
+					type="submit">Log In</Button
+				>
 			</Card.Footer>
 		</form>
 		<Card.Footer>
