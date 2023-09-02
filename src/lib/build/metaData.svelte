@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import { goto } from '$app/navigation';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import * as Card from '$lib/components/ui/card';
 	import Input from '$lib/components/ui/input/input.svelte';
@@ -7,10 +8,18 @@
 
 	import { superForm } from 'sveltekit-superforms/client';
 
-	export let data;
+	export let form;
 
 	// Client API:
-	const { form } = superForm(data.form);
+	// const { form } = superForm(data.form, {
+	// 	onUpdated: () => {
+	// 		console.log('working');
+	// 		setTimeout(() => {
+	// 			goto('/');
+	// 		}, 300);
+			
+	// 	}
+	// });
 
 	$: title = $form.metatitle;
 	$: src = $form.metaimage;
@@ -33,12 +42,12 @@
 				<Card.Content class="grid gap-4">
 					<div class="grid gap-4 grid-cols-1 md:grid-cols-2">
 						<div class="grid gap-2">
-							<Label for="web_url">URL</Label>
+							<Label for="userUrl">URL</Label>
 							<Input
-								id="web_url"
+								id="userUrl"
 								type="text"
 								placeholder="/aditya"
-								name="web_url"
+								name="userUrl"
 								bind:value={$form.userUrl}
 							/>
 						</div>
@@ -54,28 +63,28 @@
 						</div>
 					</div>
 					<div class="grid gap-2">
-						<Label for="web_title" class="flex justify-between">
+						<Label for="metatitle" class="flex justify-between">
 							Title
 							<span class={title.length > 40 ? 'text-red-600' : 'text-primary'}
 								>{title.length}/40</span
 							>
 						</Label>
 						<Input
-							id="web_title"
+							id="metatitle"
 							type="text"
 							placeholder="Aditya Portfolio"
-							name="web_title"
+							name="metatitle"
 							class="capitalize"
 							bind:value={$form.metatitle}
 						/>
 					</div>
 					<div class="grid gap-2">
-						<Label for="web_image">Image</Label>
+						<Label for="metaimage">Image</Label>
 						<Input
-							id="web_image"
+							id="metaimage"
 							type="text"
 							placeholder="Image url"
-							name="web_image"
+							name="metaimage"
 							bind:value={$form.metaimage}
 						/>
 					</div>

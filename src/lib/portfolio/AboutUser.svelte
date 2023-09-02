@@ -22,11 +22,11 @@
 				<Button variant="outline">Supabase</Button>
 				<Button variant="outline">Lucia Auth</Button>
 			</div>
-			{#if resume.length > 1}
-				<Button href={resume} target="_blank" 
-					><FileCheck2 class="mr-1" strokeWidth="1.5px" size="20" /> Resume</Button
-				>
-			{/if}
+			<!-- {#if resume.length !== 0} -->
+			<Button href={resume} target="_blank"
+				><FileCheck2 class="mr-1" strokeWidth="1.5px" size="20" /> Resume</Button
+			>
+			<!-- {/if} -->
 		</div>
 	</div>
 </div>

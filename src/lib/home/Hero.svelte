@@ -17,11 +17,12 @@
 		Tv2,
 		User
 	} from 'lucide-svelte';
+	import * as AlertDialog from '$lib/components/ui/alert-dialog';
 
 	let herosec = {
 		subtitle: 'The easiest way to build your portfolio',
 		subtext: 'Generate your portfolio in seconds with our easy to use dashboard',
-		btn1: 'Dashboard',
+		btn1: 'Sign Up',
 		btn2: 'Log In'
 	};
 	let iconsData = [
@@ -73,28 +74,17 @@
 
 <section class="bg-gray-50 relative">
 	<div class="relative hidden md:flex">
-		<Layout strokeWidth={strokeWidth} class="absolute top-20 left-1/2 rotate-45" color={iconColor} />
-		<MailCheck strokeWidth={strokeWidth} class="absolute top-32 right-80 rotate-0" color={iconColor} />
-		<LayoutGrid
-			strokeWidth={strokeWidth}
-			class="absolute top-[440px] right-80 rotate-0"
-			color={iconColor}
-		/>
-		<Monitor strokeWidth={strokeWidth} class="absolute top-[440px] left-80 rotate-45" color={iconColor} />
-		<AppWindow strokeWidth={strokeWidth} class="absolute top-[140px] left-80 rotate-45" color={iconColor} />
-		<DatabaseZap strokeWidth={strokeWidth} class="absolute top-[520px] left-1/2 " color={iconColor} />
-		<BarChart2 strokeWidth={strokeWidth} class="absolute top-[510px] right-1/3 " color={iconColor} />
-		<User strokeWidth={strokeWidth} class="absolute top-[500px] left-1/3 " color={iconColor} />
-		<!-- <Tv2 strokeWidth={strokeWidth} class="absolute top-[570px] left-20 -rotate-12 " color={iconColor} /> -->
-		<!-- <Crop strokeWidth={strokeWidth} class="absolute top-[570px] right-20 -rotate-12 " color={iconColor} /> -->
-		<!-- <CheckSquare
-			strokeWidth={strokeWidth}
-			class="absolute top-[20px] right-20 -rotate-12 "
-			color={iconColor}
-		/> -->
-		<FileCheck2 strokeWidth={strokeWidth} class="absolute top-[300px] right-32  " color={iconColor} />
-		<CheckCircle strokeWidth={strokeWidth} class="absolute top-[300px] left-32  " color={iconColor} />
-		<!-- <Camera strokeWidth={strokeWidth} class="absolute top-[30px] left-20 rotate-12 " color={iconColor} /> -->
+		<Layout {strokeWidth} class="absolute top-20 left-1/2 rotate-45" color={iconColor} />
+		<MailCheck {strokeWidth} class="absolute top-32 right-80 rotate-0" color={iconColor} />
+		<LayoutGrid {strokeWidth} class="absolute top-[440px] right-80 rotate-0" color={iconColor} />
+		<Monitor {strokeWidth} class="absolute top-[440px] left-80 rotate-45" color={iconColor} />
+		<AppWindow {strokeWidth} class="absolute top-[140px] left-80 rotate-45" color={iconColor} />
+		<DatabaseZap {strokeWidth} class="absolute top-[520px] left-1/2 " color={iconColor} />
+		<BarChart2 {strokeWidth} class="absolute top-[510px] right-1/3 " color={iconColor} />
+		<User {strokeWidth} class="absolute top-[500px] left-1/3 " color={iconColor} />
+
+		<FileCheck2 {strokeWidth} class="absolute top-[300px] right-32  " color={iconColor} />
+		<CheckCircle {strokeWidth} class="absolute top-[300px] left-32  " color={iconColor} />
 	</div>
 	<div class="mx-auto max-w-screen-xl px-4 py-20 lg:flex lg:h-[90vh] lg:items-center">
 		<div class="mx-auto max-w-6xl text-center">
@@ -112,7 +102,7 @@
 			</p>
 
 			<div class="mt-8 flex flex-wrap justify-center gap-4">
-				<Button size="lg" class="lg:px-16" href="/dashboard">
+				<Button size="lg" class="lg:px-16" href="/signup">
 					<Layout size="19" strokeWidth="1.8" class="mr-2" />
 					{herosec.btn1}</Button
 				>

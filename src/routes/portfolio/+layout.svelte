@@ -3,7 +3,6 @@
 	import SideBar from '$lib/portfolio/SideBar.svelte';
 	export let data;
 	$: routeId = $page.route.id;
-	$: console.log(routeId);
 </script>
 
 <main class="h-screen co">

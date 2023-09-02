@@ -13,7 +13,7 @@
 
 	// Client API:
 	const { form } = superForm(data.aboutform);
-	$: desc = '';
+	$: desc = $form.desc;
 	$: {
 		desc.length > 400 && (desc = desc.slice(0, 400));
 	}

@@ -78,18 +78,21 @@ export const load: PageServerLoad = async ({ locals }) => {
         return {
 
             form, aboutform, codingform,
-            expsform,projectform,
+            expsform, projectform,
             userId: session.user.userId,
             email: session.user.email,
         };
     }
     const form = await superValidate(schema);
     const aboutform = await superValidate(aboutSchema);
+    const codingform = await superValidate(codingsSchema);
+    const expsform = await superValidate(expsSchema);
+    const projectform = await superValidate(projectsSchema);
 
     // Always return { form } in load and form actions.
 
     return {
-        form, aboutform,
+        form, aboutform,codingform,expsform,projectform,
         userId: session.user.userId,
         email: session.user.email,
 
@@ -100,11 +103,16 @@ export const actions: Actions = {
     meta: async ({ request, locals }) => {
         const session = await locals.auth.validate();
 
-        let form = Object.fromEntries(await request.formData());
-        let username = form.name;
-        let metaimage = form.web_image;
-        let metatitle = form.web_title;
-        let user_url = form.web_url;
+        const form = await superValidate(request, schema);
+        console.log('POST', form);
+        if (!form.valid) {
+            // Again, always return { form } and things will just work.
+            return fail(400, { form });
+        }
+        let username = form.data.name;
+        let metaimage = form.data.metaimage;
+        let metatitle = form.data.metatitle;
+        let user_url = form.data.userUrl;
         let user_id = session.user.userId;
 
         // console.log(username, metatitle, metadesc, metatitle, metaimage, user_id, user_url);
@@ -118,6 +126,7 @@ export const actions: Actions = {
                 userId: user_id,
                 userUrl: user_url,
             })
+
         }
         catch (e) {
             console.log(e);
