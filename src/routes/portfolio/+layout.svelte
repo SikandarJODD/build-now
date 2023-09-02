@@ -1,21 +1,27 @@
 <script>
+	import { page } from '$app/stores';
 	import SideBar from '$lib/portfolio/SideBar.svelte';
 	export let data;
-	$: console.log('User data', data.getUser);
+	$: routeId = $page.route.id;
+	$: console.log(routeId);
 </script>
 
 <main class="h-screen co">
-	<SideBar img={data.getUser}>
+	{#if routeId !== '/portfolio'}
+		<!-- content here -->
+		<SideBar img={data.getUser}>
+			<slot />
+		</SideBar>
+	{:else}
 		<slot />
-	</SideBar>
+	{/if}
 </main>
 
 <style>
 	.co {
 		background-color: white;
 	}
-	main{
+	main {
 		cursor: url('$lib/cursor.png'), auto;
 	}
-	
 </style>

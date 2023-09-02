@@ -1,7 +1,6 @@
 <script>
 	import Button from '$lib/components/ui/button/button.svelte';
 
-    let techData=[""]
 </script>
 
 <div class="border border-slate-300 md:border-slate-700 px-4 md:px-6 py-7 mt-7 bg-white">

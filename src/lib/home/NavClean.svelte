@@ -17,19 +17,15 @@
 			},
 			{
 				name: 'Portfolio',
-				link: '/portfolio'
+				link: '/portfolio/demo'
 			}
 		]
 	};
 
 	let profileNavs = [
 		{
-			name: 'Your Profile',
-			link: '/'
-		},
-		{
-			name: 'Settings',
-			link: '/'
+			name: 'Dashboard',
+			link: '/build'
 		},
 		{
 			name: 'Sign out',
