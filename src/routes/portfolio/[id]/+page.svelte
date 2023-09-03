@@ -10,7 +10,7 @@
 	<ProfileCard data={data.getUser} />
 </div>
 <AboutUser intro={data.getUser?.desc} resume={data.getUser?.resumeLink} />
-<SkillsUser />
+<SkillsUser techdata={data.tech} />
 
 <style>
 	.co {

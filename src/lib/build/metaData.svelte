@@ -10,16 +10,6 @@
 
 	export let form;
 
-	// Client API:
-	// const { form } = superForm(data.form, {
-	// 	onUpdated: () => {
-	// 		console.log('working');
-	// 		setTimeout(() => {
-	// 			goto('/');
-	// 		}, 300);
-			
-	// 	}
-	// });
 
 	$: title = $form.metatitle;
 	$: src = $form.metaimage;
@@ -121,7 +111,7 @@
 			<Button
 				class="mt-4"
 				variant="outline"
-				href={`https://build-now.vercel.app/portfolio/${meta_url}`}
+				href='portfolio/{meta_url}'
 				target="_blank"
 			>
 				Visit
