@@ -5,9 +5,9 @@ import { fail, redirect } from "@sveltejs/kit";
 import type { PageServerLoad, Actions } from "./$types";
 
 export const load: PageServerLoad = async ({ locals }) => {
-	const session = await locals.auth.validate();
-	if (session) throw redirect(302, "/");
-	return {};
+    const session = await locals.auth.validate();
+    if (session) throw redirect(302, "/");
+    return {};
 };
 
 export const actions: Actions = {
@@ -45,7 +45,12 @@ export const actions: Actions = {
                     email: String(email)
                 }
             });
-         
+            // const session = await auth.createSession({
+            //     userId: user.userId,
+            //     attributes: {}
+            // });
+            // locals.auth.setSession(session)
+
         } catch (e) {
             console.log(e);
             return fail(500, {
