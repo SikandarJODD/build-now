@@ -21,29 +21,32 @@
 				<Card.Title class="text-2xl flex justify-between items-center"
 					>Coding <Badge variant="outline" class="border-green-500">Public</Badge></Card.Title
 				>
+				<Card.Description
+					>Add <code class="text-primary bg-slate-200 p-1 rounded-md">,</code> after each <span class="text-primary" >title</span>
+				</Card.Description>
 			</Card.Header>
 			<form method="POST" action="?/coding" use:enhance>
 				<Card.Content class="grid gap-4">
-						<div class="grid gap-2">
-							<Label for="lang">Language</Label>
-							<Input
-								id="lang"
-								type="text"
-								placeholder="C++, Python, Java"
-								name="lang"
-								bind:value={$form.lang}
-							/>
-						</div>
-						<div class="grid gap-2">
-							<Label for="framework">Framework</Label>
-							<Input
-								id="framework"
-								type="text"
-								placeholder="Svelte, React, Vue"
-								bind:value={$form.framework}
-								name="framework"
-							/>
-						</div>
+					<div class="grid gap-2">
+						<Label for="lang">Language</Label>
+						<Input
+							id="lang"
+							type="text"
+							placeholder="C++, Python, Java"
+							name="lang"
+							bind:value={$form.lang}
+						/>
+					</div>
+					<div class="grid gap-2">
+						<Label for="framework">Framework</Label>
+						<Input
+							id="framework"
+							type="text"
+							placeholder="Svelte, React, Vue"
+							bind:value={$form.framework}
+							name="framework"
+						/>
+					</div>
 					<div class="grid gap-2">
 						<Label for="database">Database</Label>
 						<Input

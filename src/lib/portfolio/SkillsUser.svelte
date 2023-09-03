@@ -45,13 +45,19 @@
 			.filter((n) => n != ' ');
 	});
 	let i = 0;
-	setInterval(() => {
+	let isworking = setInterval(() => {
 		i++;
 		if (i == 4) i = 0;
 	}, 2000);
+	setTimeout(() => {
+		clearInterval(isworking);
+	}, 8000);
 </script>
 
-<div class="border border-slate-300 md:border-slate-700 px-4 md:px-6 py-7 mt-7 bg-white">
+<div
+	id="skills"
+	class="border border-slate-300 md:border-slate-700 px-4 md:px-6 py-7 mt-7 bg-white"
+>
 	<h1 class="text-2xl md:text-3xl font-bold text-center md:text-left">Tech & Skills</h1>
 
 	{#each alldata as coding}
@@ -74,11 +80,10 @@
 				<div class="flex gap-5 flex-wrap">
 					{#each coding.dv as item}
 						<Button
-							class="md:text-[17px] md:py-5 md:px-8  transition-all duration-150  bg-slate-300 text-primary border border-primary group-hover:bg-primary group-hover:text-white {i ===
-								coding.id
-									? ' bg-primary  text-white'
-									: ''} "
-							>{item}</Button
+							class="md:text-[17px] md:py-5 md:px-8  transition-all duration-150 bg-yellow-200/80 text-primary border border-primary group-hover:bg-primary group-hover:text-white {i ===
+							coding.id
+								? ' bg-primary  text-white'
+								: ''} ">{item}</Button
 						>
 					{/each}
 				</div>
