@@ -8,7 +8,7 @@
 <main class="h-screen co">
 	{#if routeId !== '/portfolio'}
 		<!-- content here -->
-		<SideBar img={data.getUser}>
+		<SideBar img={data.getUser} userData={data.getAbout}>
 			<slot />
 		</SideBar>
 	{:else}

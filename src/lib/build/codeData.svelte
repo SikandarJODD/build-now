@@ -7,6 +7,7 @@
 	import { Badge } from '$lib/components/ui/badge';
 
 	import { superForm } from 'sveltekit-superforms/client';
+	import { FileCode, FileEdit } from 'lucide-svelte';
 
 	export let data;
 
@@ -69,7 +70,7 @@
 					</div>
 				</Card.Content>
 				<Card.Footer>
-					<Button class="w-full" type="submit">Submit</Button>
+					<Button class="w-full" type="submit"> <FileCode size="18" class="mr-1" strokeWidth="1.8" />Update </Button>
 				</Card.Footer>
 			</form>
 		</Card.Root>

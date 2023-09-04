@@ -5,6 +5,7 @@
 	import * as Card from '$lib/components/ui/card';
 	import Input from '$lib/components/ui/input/input.svelte';
 	import Label from '$lib/components/ui/label/label.svelte';
+	import { FileText } from 'lucide-svelte';
 
 	import { superForm } from 'sveltekit-superforms/client';
 
@@ -80,7 +81,7 @@
 					</div>
 				</Card.Content>
 				<Card.Footer>
-					<Button class="w-full" type="submit">Submit</Button>
+					<Button class="w-full" type="submit"> <FileText size="18" class="mr-1" strokeWidth="1.8"   /> Update</Button>
 				</Card.Footer>
 			</form>
 		</Card.Root>

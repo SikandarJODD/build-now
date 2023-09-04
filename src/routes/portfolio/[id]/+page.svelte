@@ -7,7 +7,7 @@
 </script>
 
 <div class="co rounded-xl shadow-md shadow-gray-400">
-	<ProfileCard data={data.getUser} />
+	<ProfileCard data={data.getUser} img={data.getMera.metaimage}/>
 </div>
 <AboutUser intro={data.getUser?.desc} resume={data.getUser?.resumeLink} />
 <SkillsUser techdata={data.tech} />

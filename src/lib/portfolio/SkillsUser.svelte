@@ -69,10 +69,10 @@
 					: ''}"
 			>
 				<h1
-					class="text-2xl font-baloo text-gray-700 group-hover:text-gray-950 transition-all duration-150 flex gap-1 {i ===
+					class="text-primary text-2xl font-baloo  group-hover:text-gray-950 transition-all duration-150 flex gap-1 {i ===
 					coding.id
-						? ' text-gray-950  '
-						: ''} "
+						? ' text-primary '
+						: 'md:text-gray-700'} "
 				>
 					<svelte:component this={coding.icon} strokeWidth="1.5" />
 					{coding.name}
@@ -80,7 +80,7 @@
 				<div class="flex gap-5 flex-wrap">
 					{#each coding.dv as item}
 						<Button
-							class="md:text-[17px] md:py-5 md:px-8  transition-all duration-150 bg-yellow-200/80 text-primary border border-primary group-hover:bg-primary group-hover:text-white {i ===
+							class="md:text-[17px] md:py-5 md:px-8  transition-all duration-150 bg-yellow-200/80 text-primary border border-primary group-hover:bg-primary group-hover:text-white capitalize {i ===
 							coding.id
 								? ' bg-primary  text-white'
 								: ''} ">{item}</Button

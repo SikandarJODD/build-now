@@ -19,8 +19,8 @@
 			<p class="max-w-4xl py-4 text-gray-600 group-hover:text-gray-800">
 				{intro}
 			</p>
-			<div class="flex justify-between">
-				<div class="flex flex-nowrap gap-3">
+			<div class="flex  justify-end md:justify-between">
+				<div class=" flex-nowrap gap-3 hidden md:flex">
 					<Button
 						variant="outline"
 						class="border-gray-600 rounded-none hover:bg-sky-400 transition-all duration-200"

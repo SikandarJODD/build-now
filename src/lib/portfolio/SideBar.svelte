@@ -8,10 +8,10 @@
 		ShieldCheck,
 		User
 	} from 'lucide-svelte';
+	export let userData = {};
 
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { onMount } from 'svelte';
 	let routeId = $page.route.id;
 	$: main_id = routeId;
 	export let img = '';
@@ -48,6 +48,10 @@
 			}
 		]
 	};
+	$: {
+		profileData.name = userData.name;
+		profileData.email = userData.email;
+	}
 	let isActive = '';
 	// onMount(() => {
 	// 	profileData.image = img;
@@ -141,7 +145,7 @@
 				<div
 					class="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-2 ring-1 ring-white/10"
 				>
-					<div class="flex h-16 shrink-0 items-center">
+					<div class="flex h-16 shrink-0 items-center text-white">
 						<!-- <img
 							class="h-8 w-auto text-white bg-white"
 							src="https://cdn-icons-png.flaticon.com/512/2886/2886689.png"
@@ -169,7 +173,7 @@
 									{/each}
 									<li>
 										<a
-											href="https://bit.ly/PriyaPalResume"
+											href={userData.resumeLink}
 											class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
 										>
 											<FileCheck2 strokeWidth="1.3" />
@@ -221,7 +225,7 @@
 							<li>
 								<!-- svelte-ignore a11y-mouse-events-have-key-events -->
 								<a
-									href="https://bit.ly/PriyaPalResume"
+									href={userData.resumeLink}
 									target="_blank"
 									class="mt-4 justify-center bg-gray-800 text-white border border-white hover:text-[#00B7FFFF] hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
 								>
@@ -265,7 +269,7 @@
 				/>
 			</svg>
 		</button>
-		<div class="flex-1 text-sm font-semibold leading-6 text-white">Dashboard</div>
+		<div class="flex-1 text-sm font-semibold leading-6 text-white">{profileData.name || 'Dashboard'}</div>
 		<!-- <div>
 			<SwitchMode />
 		</div> -->
@@ -273,8 +277,8 @@
 			<span class="sr-only">Your profile</span>
 			<img
 				class="h-8 w-8 rounded-full bg-gray-800"
-				src="https://i.pinimg.com/736x/e2/2b/ed/e22bed3bdba0f328efdb3521e07bf823.jpg"
-				alt=""
+				src={profileData.image || 'https://i.pinimg.com/736x/e2/2b/ed/e22bed3bdba0f328efdb3521e07bf823.jpg'}
+				alt="profile"
 			/>
 		</a>
 	</div>

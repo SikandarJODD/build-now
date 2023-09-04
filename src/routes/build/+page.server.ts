@@ -17,13 +17,13 @@ const schema = z.object({
 const aboutSchema = z.object({
     name: z.string(),
     email: z.string().email(),
-    userUrl: z.string(),
+    pos: z.string(),
     resumeLink: z.string(),
     githubLink: z.string(),
     linkedLink: z.string(),
     twitterLink: z.string(),
     desc: z.string(),
-    pos: z.string()
+    userUrl: z.string(),
 });
 
 const codingsSchema = z.object({
@@ -58,25 +58,31 @@ let obj = {
 }
 
 export const load: PageServerLoad = async ({ locals }) => {
+
+
     const session = await locals.auth.validate();
 
     if (!session) throw redirect(302, "/login");
-    console.log("Session ID", session.user.userId);
+    // console.log("Session ID", session.user.userId);
     let auth_user = await db.select().from(user).where(eq(user.email, session.user.email));
 
     let ans = await db.select().from(meta).where(eq(meta.userId, auth_user[0].id));
     if (ans.length > 0) {
+        let aboutStuff = await db.select().from(about).where(eq(about.userUrl, String(ans[0].userUrl)));
+        let aboutObj = aboutStuff[0];
+        // console.log(aboutStuff, 'About Stuff  Code', aboutObj);
+        let codingStuff = await db.select().from(coding).where(eq(coding.userId, String(ans[0].userUrl)));
+        let codingsObj = codingStuff[0];
         obj.name = String(ans[0].name);
         obj.metatitle = String(ans[0].metatitle);
         obj.metaimage = String(ans[0].metaimage);
         obj.userUrl = String(ans[0].userUrl);
         const form = await superValidate(obj, schema);
-        const aboutform = await superValidate(aboutSchema);
-        const codingform = await superValidate(codingsSchema);
+        const aboutform = await superValidate(Object(aboutObj), aboutSchema);
+        const codingform = await superValidate(Object(codingsObj), codingsSchema);
         const expsform = await superValidate(expsSchema);
         const projectform = await superValidate(projectsSchema);
         return {
-
             form, aboutform, codingform,
             expsform, projectform,
             userId: session.user.userId,
@@ -92,19 +98,20 @@ export const load: PageServerLoad = async ({ locals }) => {
     // Always return { form } in load and form actions.
 
     return {
-        form, aboutform,codingform,expsform,projectform,
+        form, aboutform, codingform, expsform, projectform,
         userId: session.user.userId,
         email: session.user.email,
 
     };
 };
+
+
 export const actions: Actions = {
 
-    meta: async ({ request, locals }) => {
+    meta: async ({ request, locals, url }) => {
         const session = await locals.auth.validate();
 
         const form = await superValidate(request, schema);
-        console.log('POST', form);
         if (!form.valid) {
             // Again, always return { form } and things will just work.
             return fail(400, { form });
@@ -139,86 +146,114 @@ export const actions: Actions = {
         const session = await locals.auth.validate();
 
         const form = await superValidate(request, aboutSchema);
-        console.log('POST', form);
         if (!form.valid) {
             // Again, always return { form } and things will just work.
             return fail(400, { form });
         }
-        let name = form.data.name;
-        let email = form.data.email;
-        let linked = form.data.linkedLink;
-        let github = form.data.githubLink;
-        let resume = form.data.resumeLink;
-        let twitter = form.data.twitterLink;
-        let desc = form.data.desc;
-        let pos = form.data.pos;
-        let user = await db.select().from(meta).where(eq(meta.userId, session.user.userId));
-
-        if (user.length !== 0) {
-
-            let user_url = user[0].userUrl;
-
-            // Convenient validation check:
-            try {
-                await db.insert(about).values({
-                    name: name,
-                    email: email,
-                    resumeLink: resume,
-                    githubLink: github,
-                    linkedLink: linked,
-                    twitterLink: twitter,
-                    desc: desc,
-                    userUrl: user_url,
-                    pos: pos,
-                })
+        if (session) {
+            const metaInfo = await db.select().from(meta).where(eq(meta.userId, session.user.userId));
+            let aboutStuff = await db.select().from(about).where(eq(about.userUrl, String(metaInfo[0].userUrl)));
+            let name = form.data.name;
+            let email = form.data.email;
+            let linked = form.data.linkedLink;
+            let github = form.data.githubLink;
+            let resume = form.data.resumeLink;
+            let twitter = form.data.twitterLink;
+            let desc = form.data.desc;
+            let pos = form.data.pos;
+            if (aboutStuff.length > 0) {
+                try {
+                    await db.update(about).set(
+                        {
+                            name: name,
+                            email: email,
+                            resumeLink: resume,
+                            githubLink: github,
+                            linkedLink: linked,
+                            twitterLink: twitter,
+                            desc: desc,
+                            pos: pos,
+                        }).where(eq(about.userUrl, String(metaInfo[0].userUrl)));
+                }
+                catch (e) {
+                    console.log(e);
+                }
             }
-            catch (e) {
-                console.log(e);
+            else {
+
+                let user = await db.select().from(meta).where(eq(meta.userId, session.user.userId));
+
+                if (user.length !== 0) {
+
+                    let user_url = user[0].userUrl;
+
+                    // Convenient validation check:
+                    try {
+                        await db.insert(about).values({
+                            name: name,
+                            email: email,
+                            resumeLink: resume,
+                            githubLink: github,
+                            linkedLink: linked,
+                            twitterLink: twitter,
+                            desc: desc,
+                            userUrl: user_url,
+                            pos: pos,
+                        })
+                    }
+                    catch (e) {
+                        console.log(e);
+                    }
+                }
             }
         }
-
-        // TODO: Do something with the validated data
-
-        // Yep, return { form } here too
         return { form };
-
     },
     coding: async ({ request, locals }) => {
         const session = await locals.auth.validate();
 
         const form = await superValidate(request, codingsSchema);
-        console.log('POST', form);
         if (!form.valid) {
             // Again, always return { form } and things will just work.
             return fail(400, { form });
         }
-
-        let user = await db.select().from(meta).where(eq(meta.userId, session.user.userId));
-        let lang = form.data.lang;
-        let framework = form.data.framework;
-        let database = form.data.database;
-        let others = form.data.others;
-        if (user.length !== 0) {
-
-            let user_url = user[0].userUrl;
-            // Convenient validation check:
-            try {
-                await db.insert(coding).values({
-                    lang: lang,
-                    framework: framework,
-                    others: others,
-                    database: database,
-                    userId: user_url
-                })
+        if (session) {
+            const metaInfo = await db.select().from(meta).where(eq(meta.userId, session.user.userId));
+            let codingStuff = await db.select().from(coding).where(eq(coding.userId, String(metaInfo[0].userUrl)));
+            let user = await db.select().from(meta).where(eq(meta.userId, session.user.userId));
+            let lang = form.data.lang;
+            let framework = form.data.framework;
+            let database = form.data.database;
+            let others = form.data.others;
+            if (codingStuff.length > 0) {
+                try {
+                    await db.update(coding).set(
+                        {
+                            lang: lang,
+                            framework: framework,
+                            database: database,
+                            others: others,
+                        }).where(eq(coding.userId, String(metaInfo[0].userUrl)));
+                }
+                catch (e) {
+                    console.log(e);
+                }
             }
-            catch (e) {
-                console.log(e);
+            else{
+                try {
+                    await db.insert(coding).values({
+                        lang: lang,
+                        framework: framework,
+                        others: others,
+                        database: database,
+                        userId: user[0].userUrl
+                    })
+                }
+                catch (e) {
+                    console.log(e);
+                }
             }
         }
-
-        // TODO: Do something with the validated data
-
-        // Yep, return { form } here too
         return { form };
 
     },
@@ -226,7 +261,6 @@ export const actions: Actions = {
         const session = await locals.auth.validate();
 
         const form = await superValidate(request, expsSchema);
-        console.log('POST', form);
         if (!form.valid) {
             // Again, always return { form } and things will just work.
             return fail(400, { form });
@@ -270,7 +304,6 @@ export const actions: Actions = {
         const session = await locals.auth.validate();
 
         const form = await superValidate(request, projectsSchema);
-        console.log('POST', form);
         if (!form.valid) {
             // Again, always return { form } and things will just work.
             return fail(400, { form });

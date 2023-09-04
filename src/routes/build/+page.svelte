@@ -9,7 +9,6 @@
 	export let data;
 	const { form } = superForm(data.form, {
 		onUpdated: () => {
-			console.log('working');
 			window.location.reload();
 		}
 	});

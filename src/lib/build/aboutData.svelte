@@ -8,15 +8,19 @@
 
 	import { superForm } from 'sveltekit-superforms/client';
 	import Textarea from '$lib/components/ui/textarea/textarea.svelte';
+	import { FileEdit } from 'lucide-svelte';
 
 	export let data;
 
 	// Client API:
 	const { form } = superForm(data.aboutform);
+	$: console.log($form);
+
 	$: desc = $form.desc;
 	$: {
 		desc.length > 400 && (desc = desc.slice(0, 400));
 	}
+	$: formId = $form.id;
 </script>
 
 <div class="w-full md:w-fit my-3 md:my-10">
@@ -122,7 +126,9 @@
 					</div>
 				</Card.Content>
 				<Card.Footer>
-					<Button class="w-full">Submit</Button>
+					<Button class="w-full">
+						<FileEdit size="18" class="mr-1" strokeWidth="1.8" /> Update 
+					</Button>
 				</Card.Footer>
 			</form>
 		</Card.Root>

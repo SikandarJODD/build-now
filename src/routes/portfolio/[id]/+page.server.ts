@@ -9,8 +9,9 @@ export const load: PageServerLoad = async ({ url, locals }) => {
     let getProjects = await db.select().from(projects).where(eq(projects.userUrl, userName));
     let getExps = await db.select().from(exp).where(eq(exp.userUrl, userName));
     let getTech = await db.select().from(coding).where(eq(coding.userId, userName));
-    console.log("GET USER", getUser, getExps, getProjects, getTech);
+    let getMeta = await db.select().from(meta).where(eq(meta.userUrl, userName));
     return {
+        getMera : getMeta[0] || null,
         getUser: getUser[0] || null,
         tech: getTech[0] || null,
         exps: getExps || null,

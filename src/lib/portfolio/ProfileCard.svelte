@@ -1,11 +1,11 @@
 <script>
-	import { FileBarChart } from "lucide-svelte";
-
 	export let data = '';
+	export let img = '';
 	// Data from Server - Table About
 	let about = {
 		positon: 'Full-Stack Developer',
 		name: 'Saloni Ravi Maheshwari',
+		image: 'https://i.pinimg.com/736x/e2/2b/ed/e22bed3bdba0f328efdb3521e07bf823.jpg',
 		email: 'code@gmail.com',
 		socials: [
 			{
@@ -40,17 +40,19 @@
 			about.socials[2].link = data?.twitterLink;
 			about.socials[3].link = data?.email;
 		}
+		about.image = img;
 	}
 </script>
 
-<div class="md:py-7  md:px-5">
+<div class="md:py-7 md:px-5">
 	<div
 		class="shadow-md bg-gray-50 bgcolor md:shadow-md shadow-slate-500 md:h-40 rounded-xl p-5 flex flex-wrap items-center justify-center md:justify-between md:px-20"
 	>
 		<div class="md:hidden">
 			<img
 				class="w-full h-full rounded-xl md:hidden shadow-md"
-				src="https://i.pinimg.com/736x/e2/2b/ed/e22bed3bdba0f328efdb3521e07bf823.jpg"
+				src={about.image ||
+					'https://i.pinimg.com/736x/e2/2b/ed/e22bed3bdba0f328efdb3521e07bf823.jpg'}
 				alt=""
 			/>
 		</div>
@@ -90,7 +92,7 @@
 		border: 2px solid #1a202c;
 		box-shadow: 4px 4px #1d2537;
 	}
-	:global(.font-baloo ){
+	:global(.font-baloo) {
 		font-family: 'Baloo Bhaina 2', cursive;
 	}
 	.bgcolor {
