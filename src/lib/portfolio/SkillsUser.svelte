@@ -63,9 +63,9 @@
 	{#each alldata as coding}
 		<div class="group">
 			<div
-				class="my-6 flex gap-2 flex-col border border-slate-400 bg-zinc-100 p-4 group-hover:border-slate-800 group-hover:bg-green-200 transition-all duration-150 {i ==
+				class="my-6 flex gap-2 flex-col border border-slate-400  p-4 group-hover:border-slate-800 group-hover:bg-green-200 transition-all duration-150 {i ===
 				coding.id
-					? 'border-slate-800 bg-green-200'
+					? 'border-slate-800 bg-green-200 '
 					: ''}"
 			>
 				<h1

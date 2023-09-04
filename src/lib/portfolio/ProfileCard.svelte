@@ -1,4 +1,6 @@
 <script>
+	import { FileBarChart } from "lucide-svelte";
+
 	export let data = '';
 	// Data from Server - Table About
 	let about = {
