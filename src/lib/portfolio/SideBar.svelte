@@ -1,17 +1,14 @@
 <script>
-	import {
-		CheckCircle,
-		CheckSquare,
-		FileCheck2,
-		FolderClosed,
-		Home,
-		ShieldCheck,
-		User
-	} from 'lucide-svelte';
-	export let userData = {};
+	import { CheckCircle, FileCheck2, FolderClosed, Home, ShieldCheck, User } from 'lucide-svelte';
+	export let userData = {
+		name:'Sikandar Bhide',
+		email:'justdoitnike099@gmail.com',
+		resumeLink: ''
+	};
 
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import { isActive } from '$lib/store';
 	let routeId = $page.route.id;
 	$: main_id = routeId;
 	export let img = '';
@@ -52,10 +49,8 @@
 		profileData.name = userData.name;
 		profileData.email = userData.email;
 	}
-	let isActive = '';
-	// onMount(() => {
-	// 	profileData.image = img;
-	// });
+	// $: isActive = '';
+
 	$: {
 		if (img.length > 0) {
 			profileData.image = img;
@@ -72,16 +67,6 @@
 		role="dialog"
 		aria-modal="true"
 	>
-		<!--
-		Off-canvas menu backdrop, show/hide based on off-canvas menu state.
-  
-		Entering: "transition-opacity ease-linear duration-300"
-		  From: "opacity-0"
-		  To: "opacity-100"
-		Leaving: "transition-opacity ease-linear duration-300"
-		  From: "opacity-100"
-		  To: "opacity-0"
-	  -->
 		<div
 			class="{isMenuOpen
 				? 'translate-x-0 transition-opacity ease-linear duration-300'
@@ -93,16 +78,6 @@
 				? 'translate-x-0 transition ease-in-out duration-300 transform'
 				: '-translate-x-full transition ease-in-out duration-300 transform '}    fixed inset-0 flex"
 		>
-			<!--
-		  Off-canvas menu, show/hide based on off-canvas menu state.
-  
-		  Entering: "transition ease-in-out duration-300 transform"
-			From: "-translate-x-full"
-			To: "translate-x-0"
-		  Leaving: "transition ease-in-out duration-300 transform"
-			From: "translate-x-0"
-			To: "-translate-x-full"
-		-->
 			<div
 				class="{isMenuOpen
 					? 'opacity-100 ease-in-out duration-300'
@@ -212,10 +187,14 @@
 									<a
 										on:mouseover={() => {
 											console.log(item.link);
+											isActive.set(item.link);
 											goto(item.link);
 										}}
+										
 										href={item.link}
-										class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
+										class="{$isActive === item.link
+											? 'text-white  bg-sky-800/40 border-l-4 border-sky-5'
+											: 'text-gray-400'} hover:text-white hover:bg-gray-800 group flex gap-x-3  p-2 text-sm leading-6 font-semibold transition-all duration-150 ease-in  "
 									>
 										<svelte:component this={item.icon} strokeWidth="1.3" />
 										{item.nv}
@@ -225,7 +204,7 @@
 							<li>
 								<!-- svelte-ignore a11y-mouse-events-have-key-events -->
 								<a
-									href={userData.resumeLink}
+									href={userData?.resumeLink}
 									target="_blank"
 									class="mt-4 justify-center bg-gray-800 text-white border border-white hover:text-[#00B7FFFF] hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
 								>
@@ -250,7 +229,7 @@
 			class="-m-2.5 p-2.5 text-gray-400 lg:hidden"
 			on:click={() => {
 				isMenuOpen = true;
-				console.log('Open');
+				// console.log('Open');
 			}}
 		>
 			<span class="sr-only">Open sidebar</span>
@@ -269,15 +248,15 @@
 				/>
 			</svg>
 		</button>
-		<div class="flex-1 text-sm font-semibold leading-6 text-white">{profileData.name || 'Dashboard'}</div>
-		<!-- <div>
-			<SwitchMode />
-		</div> -->
+		<div class="flex-1 text-sm font-semibold leading-6 text-white">
+			{profileData.name || 'Dashboard'}
+		</div>
 		<a href="/">
 			<span class="sr-only">Your profile</span>
 			<img
 				class="h-8 w-8 rounded-full bg-gray-800"
-				src={profileData.image || 'https://i.pinimg.com/736x/e2/2b/ed/e22bed3bdba0f328efdb3521e07bf823.jpg'}
+				src={profileData.image ||
+					'https://i.pinimg.com/736x/e2/2b/ed/e22bed3bdba0f328efdb3521e07bf823.jpg'}
 				alt="profile"
 			/>
 		</a>

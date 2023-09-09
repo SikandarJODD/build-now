@@ -4,7 +4,7 @@
 	import '../app.css';
 	export let data;
 	$: routeId = data.urlPath.split('/');
-	$: console.log(routeId);
+	$: console.log(data.urlPath,'Coding');
 </script>
 
 {#if routeId[1] !== 'portfolio'}

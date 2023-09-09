@@ -1,4 +1,5 @@
 <script>
+	import { isActive } from '$lib/store.js';
 	export let data = '';
 	export let img = '';
 	// Data from Server - Table About
@@ -44,7 +45,14 @@
 	}
 </script>
 
-<div class="md:py-7 md:px-5">
+<!-- svelte-ignore a11y-no-static-element-interactions -->
+<div class="md:py-7 md:px-5" 
+	on:mouseenter={() => {
+		if ($isActive !== '#') {
+			isActive.set('#');
+		}
+	}}
+>
 	<div
 		class="shadow-md bg-gray-50 bgcolor md:shadow-md shadow-slate-500 md:h-40 rounded-xl p-5 flex flex-wrap items-center justify-center md:justify-between md:px-20"
 	>

@@ -1,17 +1,26 @@
 <script>
+	import { isActive } from '$lib/store.js';
 	import Badge from '$lib/components/ui/badge/badge.svelte';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import { AppWindow, ArrowUpRightSquare, FileCode2, Terminal } from 'lucide-svelte';
 	let projectTech = ['React Js', 'Mongo DB', 'Node Js', 'Express Js', 'Tailwind CSS', 'Vercel'];
 	let colors = ['#9ceaef', '#a2d2ff', '#ffafcc', '#cdb4db', '#80ed99', '#affc41'];
-	export let projectData;
-	$: console.log(projectData, 'Project Data');
+	export let projectData = {
+		name: 'Creative Dev',
+		tech: 'React Js, Mongo DB, Node Js, Express Js, Tailwind CSS, Vercel',
+		desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.',
+		hostedLink: '/',
+		githubLink: '/'
+	};
 </script>
 
+<!-- svelte-ignore a11y-no-static-element-interactions -->
+<!-- svelte-ignore a11y-mouse-events-have-key-events -->
 <div
+	
 	class="bg-white border border-primary px-3 py-5 my-4 hover:bg-gradient-to-r hover:from-white hover:to-sky-200"
 >
-	<h1 class="text-3xl font-bold w-fit px-0">{projectData.name}</h1>
+	<h1 class="text-3xl font-bold w-fit px-0">{projectData?.name}</h1>
 	<div class="flex flex-wrap gap-2 my-2">
 		{#each projectData?.tech.split(',') as item, i}
 			<Badge variant="outline" style="background:{colors[i % colors.length]}" class="capitalize"
@@ -21,7 +30,7 @@
 	</div>
 	<div class="my-2 mx-1">
 		<p>
-			{@html projectData.desc}
+			{@html projectData?.desc}
 		</p>
 	</div>
 	<div class="flex gap-2 justify-end">
@@ -30,8 +39,9 @@
 			<ArrowUpRightSquare strokeWidth="1.4" class="ml-2" size="20" />
 		</Button>
 		<Button target="_blank" href={projectData?.githubLink}>
-			<FileCode2 strokeWidth="1.4" class="mr-1" size="20"/>
-			Github</Button>
+			<FileCode2 strokeWidth="1.4" class="mr-1" size="20" />
+			Github</Button
+		>
 	</div>
 </div>
 

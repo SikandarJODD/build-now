@@ -1,4 +1,5 @@
 <script>
+	import { isActive } from './../store.js';
 	import { page } from '$app/stores';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import { FileBarChart, FileCheck2 } from 'lucide-svelte';
@@ -8,7 +9,13 @@
 	export let resume = '';
 </script>
 
-<div class="group">
+<!-- svelte-ignore a11y-no-static-element-interactions -->
+<div class="group"  id="about"
+	on:mouseenter={() => {
+		if ($isActive !== '#about') {
+			isActive.set('#about');
+		}
+	}} >
 	<div
 		class="border px-6 mx-2 md:mx-10 py-7 mt-7 border-gray-900 transition-all ease-out duration-200 mint group-hover:bg-sky-400/70"
 	>
@@ -18,7 +25,7 @@
 			>
 				<FileBarChart size="27" />Introduction
 			</h1>
-			<p class="max-w-4xl py-4 md:text-gray-600 group-hover:text-gray-800 ">
+			<p class="max-w-4xl py-4 md:text-gray-600 group-hover:text-gray-800">
 				{intro}
 			</p>
 			<div class="flex justify-end md:justify-between">

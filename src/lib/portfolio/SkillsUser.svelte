@@ -1,4 +1,5 @@
 <script>
+	import { isActive } from '$lib/store.js';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import { Code2, DatabaseZap, Keyboard, QrCode } from 'lucide-svelte';
 	import { onMount } from 'svelte';
@@ -61,6 +62,11 @@
 
 <div
 	id="skills"
+	on:mouseenter={() => {
+		if ($isActive !== '#skills') {
+			isActive.set('#skills');
+		}
+	}}
 	class="border border-slate-300 md:border-slate-700 px-4 md:px-6 py-7 mt-7 bg-white"
 >
 	<h1 class="text-2xl md:text-3xl font-bold text-center md:text-left">Tech & Skills</h1>
