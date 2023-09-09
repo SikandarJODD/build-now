@@ -10,11 +10,15 @@ export const load: PageServerLoad = async ({ url, locals }) => {
     let getExps = await db.select().from(exp).where(eq(exp.userUrl, userName));
     let getTech = await db.select().from(coding).where(eq(coding.userId, userName));
     let getMeta = await db.select().from(meta).where(eq(meta.userUrl, userName));
-    return {
-        getMera : getMeta[0] || null,
-        getUser: getUser[0] || null,
-        tech: getTech[0] || null,
-        exps: getExps || null,
-        projects: getProjects || null
+    
+    if (userName !== 'demo') {
+
+        return {
+            getMera: getMeta[0] || null,
+            getUser: getUser[0] || null,
+            tech: getTech[0] || {},
+            exps: getExps || null,
+            projects: getProjects || null
+        }
     }
 };

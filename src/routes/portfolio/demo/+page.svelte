@@ -1,5 +1,6 @@
 <script>
 	import AboutUser from '$lib/portfolio/AboutUser.svelte';
+	import AllProjects from '$lib/portfolio/AllProjects.svelte';
 	import ProfileCard from '$lib/portfolio/ProfileCard.svelte';
 	import SkillsUser from '$lib/portfolio/SkillsUser.svelte';
 </script>
@@ -10,6 +11,7 @@
 	</div>
 	<AboutUser />
 	<SkillsUser />
+	<AllProjects />
 </section>
 
 <style>

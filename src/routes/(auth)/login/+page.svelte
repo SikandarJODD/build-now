@@ -5,7 +5,6 @@
 	import { Input } from '$lib/components/ui/input';
 	import { Label } from '$lib/components/ui/label';
 	import { goto } from '$app/navigation';
-	import { redirect } from '@sveltejs/kit';
 </script>
 
 <div class="justify-center flex h-[90.5vh] items-center bg-slate-200">

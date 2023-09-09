@@ -3,14 +3,14 @@
 	import AboutUser from '$lib/portfolio/AboutUser.svelte';
 	import ProfileCard from '$lib/portfolio/ProfileCard.svelte';
 	import SkillsUser from '$lib/portfolio/SkillsUser.svelte';
-	export let data;
+	export let data={};
 </script>
 
 <div class="co rounded-xl shadow-md shadow-gray-400">
 	<ProfileCard data={data.getUser} img={data.getMera.metaimage}/>
 </div>
 <AboutUser intro={data.getUser?.desc} resume={data.getUser?.resumeLink} />
-<SkillsUser techdata={data.tech} />
+<SkillsUser techdata={data?.tech} />
 
 <style>
 	.co {

@@ -14,13 +14,10 @@
 
 	// Client API:
 	const { form } = superForm(data.aboutform);
-	$: console.log($form);
-
 	$: desc = $form.desc;
 	$: {
 		desc.length > 400 && (desc = desc.slice(0, 400));
 	}
-	$: formId = $form.id;
 </script>
 
 <div class="w-full md:w-fit my-3 md:my-10">

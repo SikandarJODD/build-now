@@ -1,13 +1,13 @@
 <script>
-	import { page } from '$app/stores';
 	import NavClean from '$lib/home/NavClean.svelte';
 	import '../app.postcss';
 	import '../app.css';
-
-	$: routeId = $page.route.id?.split('/')[1];
+	export let data;
+	$: routeId = data.urlPath.split('/');
+	$: console.log(routeId);
 </script>
 
-{#if routeId !== 'portfolio'}
+{#if routeId[1] !== 'portfolio'}
 	<NavClean />
 {/if}
 <slot />
