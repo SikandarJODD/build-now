@@ -1,6 +1,7 @@
 <script>
 	import { page } from '$app/stores';
 	import AboutUser from '$lib/portfolio/AboutUser.svelte';
+	import AllProjects from '$lib/portfolio/AllProjects.svelte';
 	import ProfileCard from '$lib/portfolio/ProfileCard.svelte';
 	import SkillsUser from '$lib/portfolio/SkillsUser.svelte';
 	export let data={};
@@ -11,6 +12,7 @@
 </div>
 <AboutUser intro={data.getUser?.desc} resume={data.getUser?.resumeLink} />
 <SkillsUser techdata={data?.tech} />
+<AllProjects projects={data?.projects} />
 
 <style>
 	.co {
