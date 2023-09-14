@@ -10,8 +10,8 @@
 	class=" my-5"
 	id="projects"
 	on:mouseover={() => {
-		if ($isActive !== 'projects') {
-			isActive.set('projects');
+		if ($isActive !== '#projects') {
+			isActive.set('#projects');
 		}
 	}}
 >

@@ -5,23 +5,26 @@
 	import ProfileCard from '$lib/portfolio/ProfileCard.svelte';
 	import ProjectCard from '$lib/portfolio/ProjectCard.svelte';
 	import SkillsUser from '$lib/portfolio/SkillsUser.svelte';
+	import { isActive } from '$lib/store';
 	import { BarChart2, FileBox } from 'lucide-svelte';
 	let exps = [
 		{
+			name: 'Bloomberg',
 			position: 'Frontend Intern',
 			tech: 'React Js, Mongo DB, Node Js, Express Js, Tailwind CSS, Vercel',
 			desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.',
-			hostedLink: '/',
+			certificate: '/',
 			githubLink: '/',
-			duration: 'Jan 2023 - Present'
+			expe: 'Jan 2023 - Present'
 		},
 		{
+			name: 'Microsoft',
 			position: 'Full Stack Developer',
 			tech: 'React Js, Mongo DB, Node Js, Express Js, Tailwind CSS, Vercel',
 			desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.',
-			hostedLink: '/',
+			certificate: '/',
 			githubLink: '/',
-			duration: '3 Months'
+			expe: 'Jan 2023 - Present'
 		}
 	];
 </script>
@@ -37,15 +40,27 @@
 		<h1 class="text-3xl font-bold flex items-center">
 			<BarChart2 size="30" class="mr-1" />EXPERIENCE
 		</h1>
-		<div id="exp" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+		<div
+			id="exp"
+			on:mouseenter={() => {
+				isActive.set('#exp');
+			}}
+			class="grid grid-cols-1 md:grid-cols-2 gap-8"
+		>
 			{#each exps as exp, i}
 				<ExperienceCard projectData={exp} />
 			{/each}
 			<!-- <ExperienceCard /> -->
 		</div>
 	</div>
-	<div class="md:mx-6 mt-3">
-		<h1 class="text-3xl font-bold flex items-center ">
+	<div
+		class="md:mx-6 mt-3"
+		id="projects"
+		on:mouseenter={() => {
+			isActive.set('#projects');
+		}}
+	>
+		<h1 class="text-3xl font-bold flex items-center">
 			<FileBox size="30" class="mr-1" />PROJECTS
 		</h1>
 		<ProjectCard />
